@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { Html, OrbitControls } from "@react-three/drei";
 
 function File() {
   const ref = useRef<THREE.Mesh>(null!);
@@ -92,6 +93,15 @@ export default function Document() {
         color="white"
       />
       <File />
+      <Html position={[0, 0.07, 0]} rotation={[-1.55,0,0]} transform occlude>
+        <div>
+          <iframe
+            src="https://portfolio-tusharpuri10.vercel.app/"
+            style={{ width: "800px", height: "1000px", transform: "scale(0.1)" }}
+          ></iframe>
+        </div>
+      </Html>
+      <OrbitControls/>
     </Canvas>
   );
 }
