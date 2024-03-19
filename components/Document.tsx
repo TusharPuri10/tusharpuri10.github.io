@@ -20,8 +20,8 @@ function File() {
   const [isClosed, setIsClosed] = useState(true);
   const { camera } = useThree();
   
-  const originalPosition = new THREE.Vector3(0, 4, 7.5);
-  const targetPosition = new THREE.Vector3(0, 2.35, 0);
+  const originalPosition = new THREE.Vector3(0, 30, 50);
+  const targetPosition = new THREE.Vector3(0, 25, 0);
   const duration = (anim.duration / 4) * 1000;
   
   const toggleAnimation = () => {
@@ -76,7 +76,7 @@ function File() {
 
   return (
     <mesh ref={ref} onClick={toggleAnimation}>
-      <primitive object={gltf.scene} />
+      <primitive object={gltf.scene} scale={[10, 10, 10]}/>
     </mesh>
   );
 }
@@ -85,19 +85,20 @@ export default function Document() {
   return (
     <Canvas
       style={{ height: "100vh", backgroundColor: "#000000" }}
-      camera={{ position: [0, 4, 7.5] }}
+      camera={{ position: [0, 30, 50] }}
     >
       <pointLight
-        intensity={200}
-        position={[1, 7, 0]}
+        intensity={6000}
+        position={[5, 50, -10]}
         color="white"
       />
       <File />
-      <Html position={[0, 0.07, 0]} rotation={[-1.55,0,0]} transform occlude>
+      <Html position={[0, 0.8, 0]} rotation={[-1.575,0,0]} transform occlude>
         <div>
           <iframe
+            title="external-content"
             src="https://portfolio-tusharpuri10.vercel.app/"
-            style={{ width: "800px", height: "1000px", transform: "scale(0.1)" }}
+            style={{ width: "850px", height: "1150px" }}
           ></iframe>
         </div>
       </Html>
