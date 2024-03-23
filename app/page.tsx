@@ -12,12 +12,11 @@ import { Skills } from "@/components/ui/skills/Skills";
 
 export default function Home() {
   const [documentLoaded, setDocumentLoaded] = useState(false);
-  useEffect(()=>{
-    setTimeout(
-      ()=>setDocumentLoaded(true),
-      3000
-    )
-  },[])
+  
+  useLayoutEffect(() => {
+    // This code will run synchronously after all DOM mutations
+    setDocumentLoaded(true);
+  }, []);
 
   useEffect(() => {
     // Check if the user is viewing the page on a phone
