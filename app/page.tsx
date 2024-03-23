@@ -19,7 +19,14 @@ export default function Home() {
     )
   },[])
 
-
+  useEffect(() => {
+    // Check if the user is viewing the page on a phone
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    if (isMobile) {
+      // Redirect to another URL
+      window.location.href = 'https://portfolio-tusharpuri10.vercel.app/';
+    }
+  }, []);
 
   const items = [
     {
@@ -55,7 +62,7 @@ export default function Home() {
   return (
     <div>
       {documentLoaded && <Document />}
-      <BentoGrid className="max-w-4xl py-4 mx-auto hidden md:grid">
+      <BentoGrid className="max-w-4xl py-4 mx-auto">
         {items.map((item, i) => (
           <BentoGridItem
             key={i}
