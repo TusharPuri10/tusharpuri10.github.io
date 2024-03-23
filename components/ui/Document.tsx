@@ -23,7 +23,7 @@ function File() {
   const originalCameraPosition = new THREE.Vector3(0, 30, 15);
   const targetCameraPosition = new THREE.Vector3(0, 20, -0);
 
-  const originalDocumentPosition = new THREE.Vector3(40, -15, -40);
+  const originalDocumentPosition = new THREE.Vector3(45, -15, -38);
   const targetDocumentPosition = new THREE.Vector3(3, 0, 0);
   const [position, SetPosition] = useState(originalDocumentPosition);
 
@@ -123,12 +123,17 @@ useEffect(() => {
 export default function Document() {
   return (
     <Canvas
-      style={{ height: "100vh", background: "transparent", position: "absolute", zIndex: "100" }}
+      style={{ height: "100vh", background: "transparent", position: "absolute", zIndex: "10" }}
       camera={{ position: [0, 30, 15] }}
     >
       <pointLight
         intensity={6000}
         position={[5, 50, -10]}
+        color="white"
+      />
+      <pointLight
+        intensity={400}
+        position={[35, 2, -30]}
         color="white"
       />
       <File />

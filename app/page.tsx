@@ -4,35 +4,32 @@ import { BentoGrid, BentoGridItem } from "@/components/ui/bento"
 import { cn } from "@/utils/cn";
 import {
   IconArrowWaveRightUp,
-  IconBoxAlignRightFilled,
-  IconBoxAlignTopLeft,
   IconBrandGithub,
-  IconTableColumn,
 } from "@tabler/icons-react";
 import { Loader } from "@/components/ui/loader/Loader";
-import {useLayoutEffect, useState } from "react";
+import {useEffect, useLayoutEffect, useState } from "react";
 import { Skills } from "@/components/ui/skills/Skills";
 
 export default function Home() {
   const [documentLoaded, setDocumentLoaded] = useState(false);
-  useLayoutEffect(() => {
-    // This code will run synchronously after all DOM mutations
-    setDocumentLoaded(true);
-  }, []);
+  useEffect(()=>{
+    setTimeout(
+      ()=>setDocumentLoaded(true),
+      3000
+    )
+  },[])
 
-  const Skeleton = () => (
-    <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-neutral-200 dark:from-neutral-900 dark:to-neutral-800 to-neutral-100"></div>
-  );
+
 
   const items = [
     {
       title: "Tushar Puri",
       description: "Your go-to expert for website development, LLM training and seamless integration of LLMs into websites.",
-      header: <img src="/suit.jpg"></img>,
+      header: <img src="/suit.jpg" className="rounded-lg "/>
     },
     {
       title: "Continous learning",
-      description: "Here are the tools, frameworks and languages I'm familiar with and I'm actively seeking to broaden my skill set by acquiring new experiences.",
+      description: "Here are the tools & frameworks I'm familiar with and I'm actively seeking new opportunities to broaden my skill set.",
       header: <Skills/>,
       icon: <IconArrowWaveRightUp className="h-4 w-4 text-neutral-500" />,
     },
@@ -58,7 +55,7 @@ export default function Home() {
   return (
     <div>
       {documentLoaded && <Document />}
-      <BentoGrid className="max-w-4xl py-8 mx-auto hidden md:grid">
+      <BentoGrid className="max-w-4xl py-4 mx-auto hidden md:grid">
         {items.map((item, i) => (
           <BentoGridItem
             key={i}
