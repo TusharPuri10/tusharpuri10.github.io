@@ -23,7 +23,7 @@ function File() {
   const originalCameraPosition = new THREE.Vector3(0, 30, 15);
   const targetCameraPosition = new THREE.Vector3(0, 20, -0);
 
-  const originalDocumentPosition = window.innerWidth < 600 && window.innerHeight < 600 ? new THREE.Vector3(0, 0, 0) : new THREE.Vector3(35, -10, -30);
+  const originalDocumentPosition = new THREE.Vector3(40, -15, -40);
   const targetDocumentPosition = new THREE.Vector3(3, 0, 0);
   const [position, SetPosition] = useState(originalDocumentPosition);
 
@@ -107,12 +107,12 @@ useEffect(() => {
   return (
     <group ref={ref} onClick={toggleAnimation}>
       <primitive object={gltf.scene} scale={[8, 8, 8]} />
-      <Html position={[1, 1, 0]} rotation={[-1.575, 0, 0]} transform occlude>
+      <Html position={[0, 0.9, 0]} rotation={[-1.575, 0, 0]} transform occlude>
         <div>
           <iframe
             title="external-content"
             src="https://portfolio-tusharpuri10.vercel.app/"
-            style={{ width: "700px", height: "1000px" }}
+            style={{ width: "600px", height: "900px" }}
           ></iframe>
         </div>
       </Html>
