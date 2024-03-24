@@ -104,6 +104,15 @@ useEffect(() => {
     }
   });
 
+  const [isVisible, setIsVisible] = useState(true);
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setIsVisible(prevState => !prevState);
+    }, 5000); // Change visibility every 5 seconds
+
+    return () => clearInterval(intervalId); // Clean up interval on component unmount
+  }, []);
+
   return (
     <group ref={ref} onClick={toggleAnimation}>
       <primitive object={gltf.scene} scale={[8, 8, 8]} />
@@ -111,9 +120,14 @@ useEffect(() => {
         <div>
           <iframe
             title="external-content"
-            src="https://portfolio-tusharpuri10.vercel.app/"
-            style={{ width: "600px", height: "900px" }}
+            src="https://portfolio-d8-d8-cf.vercel.app/"
+            style={{ width: "500px", height: "800px" , scale: "1.2"}}
           ></iframe>
+        </div>
+      </Html>
+      <Html position={[-10, 2, 8]}>
+        <div className="w-12 h-12">
+          {isClosed && isVisible && <img src="/hand-apple.gif" alt="" />}
         </div>
       </Html>
     </group>

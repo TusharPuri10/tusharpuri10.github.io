@@ -5,6 +5,7 @@ import { cn } from "@/utils/cn";
 import {
   IconArrowWaveRightUp,
   IconBrandGithub,
+  IconFile3d
 } from "@tabler/icons-react";
 import { Loader } from "@/components/ui/loader/Loader";
 import {useEffect, useLayoutEffect, useState } from "react";
@@ -18,20 +19,11 @@ export default function Home() {
     setDocumentLoaded(true);
   }, []);
 
-  useEffect(() => {
-    // Check if the user is viewing the page on a phone
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    if (isMobile) {
-      // Redirect to another URL
-      window.location.href = 'https://portfolio-tusharpuri10.vercel.app/';
-    }
-  }, []);
-
   const items = [
     {
       title: "Tushar Puri",
-      description: "Your go-to expert for website development, LLM training and seamless integration of LLMs into websites.",
-      header: <img src="/suit.jpg" className="rounded-lg "/>
+      description: "My interest is in website development, LLM training and seamless integration of LLMs into websites.",
+      header: <img src="/hill.jpg" className="rounded-lg "/>
     },
     {
       title: "Continous learning",
@@ -41,8 +33,10 @@ export default function Home() {
     },
     {
       title: "Portfolio",
-      description: "You can find my projects here",
-      header: <div className="pt-4">{!documentLoaded && <Loader/>}</div>,
+      description: "You can find my projects here.",
+      header: <div className="pt-4">{!documentLoaded && <Loader/>}
+      <div className="lg:hidden block flex justify-center  bg-gradient-to-br from-yellow-400 via-green-500 to-purple-600 animate-glow rounded-xl py-4"><a href="https://portfolio-tusharpuri10.vercel.app/" target="_blank"><IconFile3d className="h-28 w-28 text-black animate-shake" /></a></div>
+      </div>,
     },
     {
       title: "Consistency is the key",
@@ -52,7 +46,7 @@ export default function Home() {
     {
       title: "Github Stats",
       description: "I like typescript and python. I enjoy building websites and tolerate solving bugs.",
-      header: <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=tusharpuri10&layout=donut&show_icons=true&title_color=ffffff&icon_color=34abeb&text_color=daf7dc&bg_color=151515"/>,
+      header: <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=tusharpuri10&layout=compact&show_icons=true&title_color=ffffff&icon_color=34abeb&text_color=daf7dc&bg_color=151515"/>,
       icon: <IconBrandGithub className="h-5 w-5 text-white"/>
     },
     
@@ -60,8 +54,8 @@ export default function Home() {
 
   return (
     <div>
-      {documentLoaded && <Document />}
-      <BentoGrid className="max-w-4xl py-4 mx-auto">
+      <div className="hidden lg:block">{documentLoaded && <Document />}</div>
+      <BentoGrid className="max-w-4xl py-12 px-8 lg:py-4 mx-auto">
         {items.map((item, i) => (
           <BentoGridItem
             key={i}
