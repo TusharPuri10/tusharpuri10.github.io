@@ -1,11 +1,9 @@
 'use client';
 import Document from "@/components/ui/Document";
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento"
-import { cn } from "@/utils/cn";
 import {
   IconArrowWaveRightUp,
   IconBrandGithub,
-  IconFile3d
 } from "@tabler/icons-react";
 import { Loader } from "@/components/ui/loader/Loader";
 import {useEffect, useLayoutEffect, useState } from "react";
@@ -20,7 +18,7 @@ export default function Home() {
   }, []);
 
   // State to determine if the device is mobile
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isMobile, setIsMobile] = useState(false);
 
   // Update isMobile on window resize
   useEffect(() => {
