@@ -4,11 +4,17 @@ import { useRef, useState, useEffect } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-import { Html, OrbitControls } from "@react-three/drei";
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
+import { Html, OrbitControls} from "@react-three/drei";
 
 function File() {
   const ref = useRef<THREE.Group>(null!);
-  const gltf = useLoader(GLTFLoader, "/document_file_folder/scene.gltf");
+  // Use a configuration function to set up the DRACO loader for the GLTFLoader
+  const gltf = useLoader(GLTFLoader, "/document_file_folder/scene.gltf", loader => {
+    const dracoLoader = new DRACOLoader();
+    dracoLoader.setDecoderPath("/draco/");
+    loader.setDRACOLoader(dracoLoader);
+  });
 
   const anim: any = gltf.animations.find(
     (animation: { name: string; }) => animation.name === "Anim"
@@ -19,12 +25,27 @@ function File() {
   
   const [isClosed, setIsClosed] = useState(true);
   const { camera } = useThree();
-  
-  const originalCameraPosition = new THREE.Vector3(0, 30, 15);
-  const targetCameraPosition = new THREE.Vector3(0, 20, -0);
 
-  const originalDocumentPosition = new THREE.Vector3(45, -15, -38);
-  const targetDocumentPosition = new THREE.Vector3(3, 0, 0);
+  // State to determine if the device is mobile
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  // Update isMobile on window resize
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  
+  // Define coordinates based on device type
+  const originalCameraPosition = isMobile ? new THREE.Vector3(0, 10, 60) : new THREE.Vector3(0, 30, 15);
+  const targetCameraPosition = isMobile ? new THREE.Vector3(0, 35, 0) : new THREE.Vector3(0, 20, -0);
+
+  const originalDocumentPosition = isMobile ? new THREE.Vector3(0, -65, -38) : new THREE.Vector3(45, -15, -38);
+  const targetDocumentPosition = isMobile ? new THREE.Vector3(0, 4, 0) : new THREE.Vector3(3, 0, 0);
   const [position, SetPosition] = useState(originalDocumentPosition);
 
   const duration = (anim.duration / 4) * 1000;
@@ -116,11 +137,11 @@ useEffect(() => {
   return (
     <group ref={ref} onClick={toggleAnimation}>
       <primitive object={gltf.scene} scale={[8, 8, 8]} />
-      <Html position={[0, 0.9, 0]} rotation={[-1.575, 0, 0]} transform occlude>
+      <Html position={isMobile ? [0, 0.5, 0] : [0, 0.9, 0]} rotation={[-1.575, 0, 0]} transform occlude>
         <div>
           <iframe
             title="external-content"
-            src="https://portfolio-d8-d8-cf.vercel.app/"
+            src="https://www.tusharpuri.com/"
             style={{ width: "500px", height: "800px" , scale: "1.2"}}
           ></iframe>
         </div>
@@ -135,10 +156,22 @@ useEffect(() => {
 }
 
 export default function Document() {
+  // State to determine if the device is mobile
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  // Update isMobile on window resize
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   return (
     <Canvas
       style={{ height: "100vh", background: "transparent", position: "absolute", zIndex: "10" }}
-      camera={{ position: [0, 30, 15] }}
+      camera={{ position: isMobile ? [0, 10, 60] : [0, 30, 15] }}
     >
       <pointLight
         intensity={6000}
@@ -147,10 +180,11 @@ export default function Document() {
       />
       <pointLight
         intensity={400}
-        position={[35, 2, -30]}
+        position={isMobile ? [-12, -50, -30] : [35,2,-30]}//35, 2, -30
         color="white"
       />
       <File />
+      <OrbitControls />
     </Canvas>
   );
 }

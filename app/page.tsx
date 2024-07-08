@@ -35,7 +35,7 @@ export default function Home() {
       title: "Portfolio",
       description: "You can find my projects here.",
       header: <div className="pt-4">{!documentLoaded && <Loader/>}
-      <div className="lg:hidden block flex justify-center  bg-gradient-to-br from-yellow-400 via-green-500 to-purple-600 animate-glow rounded-xl py-4"><a href="https://portfolio-tusharpuri10.vercel.app/" target="_blank"><IconFile3d className="h-28 w-28 text-black animate-shake" /></a></div>
+      <div className="lg:hidden block flex justify-center  bg-gradient-to-br from-yellow-400 via-green-500 to-purple-600 animate-glow rounded-xl py-20"></div>
       </div>,
     },
     {
@@ -54,7 +54,7 @@ export default function Home() {
 
   return (
     <div>
-      <div className="hidden lg:block">{documentLoaded && <Document />}</div>
+      <div>{documentLoaded && <Document />}</div>
       <BentoGrid className="max-w-4xl py-12 px-8 lg:py-4 mx-auto">
         {items.map((item, i) => (
           <BentoGridItem
