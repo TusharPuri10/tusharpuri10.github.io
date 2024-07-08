@@ -41,11 +41,11 @@ function File() {
 
   
   // Define coordinates based on device type
-  const originalCameraPosition = isMobile ? new THREE.Vector3(0, 10, 60) : new THREE.Vector3(0, 30, 15);
-  const targetCameraPosition = isMobile ? new THREE.Vector3(0, 35, 0) : new THREE.Vector3(0, 20, -0);
+  const originalCameraPosition = isMobile ? new THREE.Vector3(0, 12, 60) : new THREE.Vector3(0, 30, 15);
+  const targetCameraPosition = isMobile ? new THREE.Vector3(0, 40, 0) : new THREE.Vector3(0, 20, -0);
 
-  const originalDocumentPosition = isMobile ? new THREE.Vector3(0, -70, -35) : new THREE.Vector3(45, -15, -38);
-  const targetDocumentPosition = isMobile ? new THREE.Vector3(0, 3, 15) : new THREE.Vector3(3, 0, 0);
+  const originalDocumentPosition = isMobile ? new THREE.Vector3(0, -70, -40) : new THREE.Vector3(45, -15, -38);
+  const targetDocumentPosition = isMobile ? new THREE.Vector3(0, 10, 10) : new THREE.Vector3(3, 0, 0);
   const [position, SetPosition] = useState(originalDocumentPosition);
 
   const duration = (anim.duration / 4) * 1000;
