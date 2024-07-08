@@ -5,7 +5,7 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
-import { Html, OrbitControls} from "@react-three/drei";
+import { Html} from "@react-three/drei";
 
 function File() {
   const ref = useRef<THREE.Group>(null!);
@@ -184,7 +184,6 @@ export default function Document() {
         color="white"
       />
       <File />
-      <OrbitControls />
     </Canvas>
   );
 }

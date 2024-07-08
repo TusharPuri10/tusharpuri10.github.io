@@ -19,11 +19,24 @@ export default function Home() {
     setDocumentLoaded(true);
   }, []);
 
+  // State to determine if the device is mobile
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  // Update isMobile on window resize
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const items = [
     {
       title: "Tushar Puri",
-      description: "My interest is in website development, LLM training and seamless integration of LLMs into websites.",
-      header: <img src="/hill.jpg" className="rounded-lg "/>
+      description: "My interest is in building beautiful websites, tools and applications. I'm a full stack developer with a passion for learning and sharing my knowledge with others.",
+      header: <img src="/mountain.jpg" className="rounded-lg "/>
     },
     {
       title: "Continous learning",
@@ -34,17 +47,17 @@ export default function Home() {
     {
       title: "Portfolio",
       description: "You can find my projects here.",
-      header: <div className="pt-4">{!documentLoaded && <Loader/>}
+      header: <div className="pt-4">{!documentLoaded && !isMobile && <Loader/>}
       <div className="lg:hidden block flex justify-center  bg-gradient-to-br from-yellow-400 via-green-500 to-purple-600 animate-glow rounded-xl py-20"></div>
       </div>,
     },
     {
-      title: "Consistency is the key",
+      title: "Trying to maintain consistency in this chaotic world!",
       header: <img src="https://github-readme-activity-graph.vercel.app/graph?username=tusharpuri10&theme=github-compact"/>,
       icon: <IconBrandGithub className="h-5 w-5 text-white"/>
     },
     {
-      title: "Github Stats",
+      title: "Coding Languages I know",
       description: "I like typescript and python. I enjoy building websites and tolerate solving bugs.",
       header: <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=tusharpuri10&layout=compact&show_icons=true&title_color=ffffff&icon_color=34abeb&text_color=daf7dc&bg_color=151515"/>,
       icon: <IconBrandGithub className="h-5 w-5 text-white"/>
